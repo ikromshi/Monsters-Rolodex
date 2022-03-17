@@ -1,0 +1,43 @@
+import { Component } from "react";
+
+import logo from './logo.svg';
+import './App.css';
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "Ikromshi",
+      company: "BMW"
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Hi {this.state.name}, I work at {this.state.company}
+          </p>
+          <button 
+            onClick={() => {
+              this.setState(() => {
+                return {name:"Ikrom"} // 1. setState changes the object, letting React detect it and change the DOM
+              });              
+            }}>
+            Change name
+          </button>
+        </header>
+      </div>
+    );
+  }
+}
+  
+
+export default App;
+
+/**
+ * 1 setState is a method that takes an object, looks for the same keys in the constructor obj and sets the value
+ *    setState is async, so it should be a function (prev this.setState({name: Ikrom}) )
+ */
