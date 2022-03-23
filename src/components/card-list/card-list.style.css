@@ -6,3 +6,11 @@
     grid-gap: 20px;
 }
 
+.card-list {
+    width: 85vw;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    word-wrap: break-word;
+  }
