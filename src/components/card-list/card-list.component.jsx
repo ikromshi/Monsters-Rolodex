@@ -1,13 +1,13 @@
-import "./card-list.style.css";
+import { CardListStyles } from "./card-list.style";
 import Card from "../card/card-component";
 
 
 const CardList = ({ monsters }) => (
-    <div className="card-list" >
+    <CardListStyles>
         {monsters.map((monster) => {
             return <Card monster={monster}/>;
         })}
-    </div>
+    </CardListStyles>
 )
 
 export { CardList as default }
