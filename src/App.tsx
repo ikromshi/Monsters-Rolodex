@@ -1,8 +1,14 @@
-import { useState, useEffect } from "react"; // importing the useState hook to replace this.state (class components)
+import { useState, useEffect, ChangeEvent } from "react"; // importing the useState hook to replace this.state (class components)
 import SearchBox from "./components/search-box/search-box.components";
+import { getData } from "./utils/data.utils";
 import CardList from "./components/card-list/card-list.component";
 import './App.css';
 
+export type Monster = {
+  id: string;
+  name: string;
+  email: string;
+}
 
 const App = () => {
   /** 
@@ -10,7 +16,7 @@ const App = () => {
    * create anotber useState when there's a need for more variables to store
    */
   const [searchField, setSearchField] = useState(""); 
-  const [monsters, setMonsters] = useState([]);
+  const [monsters, setMonsters] = useState<Monster[]>([]);
   const [filteredMonstersArr, setFilteredMonsters] = useState(monsters);
 
   /**
@@ -19,10 +25,12 @@ const App = () => {
    * it only runs when the page loads and when the dependency array changes
    */
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-    .then(response => response.json())
-    .then(users => setMonsters(users));
-  }, [])
+    const fetchUsers = async() => {
+      const users = await getData<Monster[]>("https://jsonplaceholder.typicode.com/users");
+      setMonsters(users);
+    };
+    fetchUsers();
+  }, []);
 
   useEffect(() => {
     const filteredMonsters = monsters.filter(monster => {
@@ -34,8 +42,8 @@ const App = () => {
   /**
    * Sets the value of searchField to what the user inputs, by calling setSearchField()
    */
-  const onSearchChange = (e) => {
-    const searchFieldString = e.target.value.toLowerCase();
+  const onSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const searchFieldString = event.target.value.toLowerCase();
       setSearchField(searchFieldString);
   }
 
