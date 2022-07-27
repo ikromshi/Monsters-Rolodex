@@ -45,7 +45,7 @@ const App = () => {
   const onSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const searchFieldString = event.target.value.toLowerCase();
       setSearchField(searchFieldString);
-  }
+  };
 
   return (
     <div className="App">
